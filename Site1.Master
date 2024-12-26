@@ -1,0 +1,246 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="ITSG_Inventory.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>ITSG Inventory</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.bundle.min.js"></script>
+    <link href="Content1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content1/sidebars.css" rel="stylesheet" />
+    <link href="Content1/mystyle.css" rel="stylesheet" />
+    <script type="text/javascript">
+        function ShowNotifications() {
+            // Get the toast element
+            var notif = document.getElementById("modalNotification");
+
+            // Show the toast
+            notif.style.display = "block";
+
+            // Hide the toast after 3 seconds
+            setTimeout(function () {
+                notif.style.display = "none";
+            }, 700);
+        }
+
+        function convertToUpperCase(element) {
+            element.value = element.value.toUpperCase();
+        }
+
+        function allowOnlyHyphenOrAlphabets(event) {
+            var key = event.keyCode || event.which;
+            var keyChar = String.fromCharCode(key);
+            var value = event.target.value;
+
+            // Allow alphabets, numbers, and hyphen (-)
+            if ((key >= 65 && key <= 90) || (key >= 48 && key <= 57) || key === 45) {
+                // Check if hyphen is already present or not the first character
+                if (key === 45 && (value.includes("-") || value.length === 0)) {
+                    event.preventDefault();
+                    return false;
+                }
+                return true;
+            }
+
+            // Convert to uppercase for entered alphabets
+            if (key >= 97 && key <= 122) {
+                event.preventDefault();
+                keyChar = keyChar.toUpperCase();
+                event.target.value += keyChar;
+            }
+
+            // Prevent other special characters
+            event.preventDefault();
+            return false;
+        }
+    </script>
+    <style>
+        .page {
+            line-height: 26px;
+        }
+
+            .page span {
+                padding: 5px;
+                border: solid 1px #477B0E;
+                text-decoration: none;
+                white-space: nowrap;
+                background: #1fb5bf
+            }
+
+            .page a,
+            .page a:visited {
+                text-decoration: none;
+                padding: 6px;
+                white-space: nowrap;
+            }
+
+                .page a:hover,
+                .page a:active {
+                    padding: 5px;
+                    border: solid 1px #9ECDE7;
+                    text-decoration: none;
+                    white-space: nowrap;
+                    background: #486694;
+                }
+    </style>
+</head>
+<body>
+
+    <form id="form1" runat="server">
+
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <symbol id="bootstrap" viewBox="0 0 118 94">
+                <title>Bootstrap</title>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"></path>
+            </symbol>
+            <symbol id="home" viewBox="0 0 16 16">
+                <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+            </symbol>
+            <symbol id="speedometer2" viewBox="0 0 16 16">
+                <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z" />
+                <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z" />
+            </symbol>
+            <symbol id="table" viewBox="0 0 16 16">
+                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z" />
+            </symbol>
+            <symbol id="people-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+            </symbol>
+            <symbol id="grid" viewBox="0 0 16 16">
+                <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+            </symbol>
+            <symbol id="credit-card-2-back-fill" viewBox="0 0 16 16">
+                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5H0V4zm11.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zM0 11v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1H0z" />
+            </symbol>
+            <symbol id="diamond-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435z" />
+            </symbol>
+            <symbol id="shuffle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z" />
+                <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z" />
+            </symbol>
+            <symbol id="wrench" viewBox="0 0 16 16">
+                <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z" />
+            </symbol>
+            <symbol id="clock-history" viewBox="0 0 16 16">
+                <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z" />
+                <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z" />
+                <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z" />
+            </symbol>
+        </svg>
+
+        <main class="d-flex flex-nowrap" style="height: 100vh;">
+            <div class="d-flex flex-column flex-shrink-0 bg-body-tertiary" style="width: 4.5rem;">
+                <%--                <a href="#" class="d-block p-3 link-body-emphasis text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <svg class="bi pe-none" width="40" height="32">
+                        <use xlink:href="Content1/Img/inventory.svg" />
+                    </svg>
+                </a>--%>
+                <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+                    <li class="nav-item">
+                        <a href="Home.aspx" runat="server" class="nav-link py-3 border-bottom rounded-0" aria-current="page" title="Home" id="Home" data-bs-toggle="tooltip" data-bs-placement="right">
+                            <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Home">
+                                <use xlink:href="#home" />
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Accountability.aspx" runat="server" class="nav-link py-3 border-bottom rounded-0" title="Accountability" id="Accountability" data-bs-toggle="tooltip" data-bs-placement="right">
+                            <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Accountability">
+                                <use xlink:href="#credit-card-2-back-fill" />
+                            </svg>
+                            <span class="visually-hidden">Accountability</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="RFT.aspx" runat="server" class="nav-link py-3 border-bottom rounded-0" title="RFT" id="RFT" data-bs-toggle="tooltip" data-bs-placement="right">
+                            <svg class="bi pe-none" width="24" height="24" role="img" aria-label="RFT">
+                                <use xlink:href="#shuffle" />
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Repair.aspx" runat="server" class="nav-link py-3 border-bottom rounded-0" title="Repair" id="Repair" data-bs-toggle="tooltip" data-bs-placement="right">
+                            <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Repair">
+                                <use xlink:href="#wrench" />
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="History.aspx" runat="server" class="nav-link py-3 border-bottom rounded-0" title="History" id="History" data-bs-toggle="tooltip" data-bs-placement="right">
+                            <svg class="bi pe-none" width="24" height="24" role="img" aria-label="History">
+                                <use xlink:href="#clock-history" />
+                            </svg>
+                            <span class="visually-hidden">History</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="dropdown border-top">
+                    <a href="#" class="d-flex align-items-center justify-content-center p-3 link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <asp:Image runat="server" ID="ImgProfilePicture" AlternateText="Image" Width="24" Height="24" CssClass="rounded-circle" />
+                    </a>
+                    <ul class="dropdown-menu text-small shadow" style="text-align: center;">
+                        <li>
+                            <asp:Label runat="server" ID="lblfname" Class="dropdown-item" Text="EmployeeName" /></li>
+                        <li>
+                            <asp:Label runat="server" ID="lblposition" Class="dropdown-item" Text="EmployeePosition" /></li>
+                        <li>
+                            <asp:Label runat="server" ID="lbldept" Class="dropdown-item" Text="EmployeeDepartment" /></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a runat="server" class="dropdown-item" id="loguout" onserverclick="loguout_ServerClick">Sign out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container-fluid" style="overflow: auto;">
+                <div class="card" style="margin-top: 10px;">
+                    <div class="card-body">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+                <div class="myfooter">
+                    <footer style="text-align: center;">
+                        <p>&copy; <%: DateTime.Now.Year %> - ITSG - Inventory System</p>
+                    </footer>
+                </div>
+            </div>
+        </main>
+
+        <%--<--------------Modal Notification Area-------------->--%>
+        <div id="modalNotification" class="modal" runat="server" style="display: none; z-index: 1000; background-color: rgba(0, 0, 0, 0.37); overflow-y: auto;" autopostback="true">
+            <div class="modal-dialog modal-sm modal-dialog-top" style="text-align: center!important;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title text-center">
+                            <h5>Notifications</h5>
+                        </div>
+                    </div>
+                    <asp:UpdatePanel runat="server" ID="PanelNotif" UpdateMode="Always">
+                        <ContentTemplate>
+                            <div class="modal-body" style="text-align: center;">
+                                <h6 runat="server" id="modalbody"></h6>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+
+        <script src="/Content1/js/bootstrap.bundle.min.js"></script>
+        <script src="/Content1/sidebars.js"></script>
+    </form>
+
+</body>
+</html>

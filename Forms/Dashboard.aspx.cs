@@ -31,5 +31,6 @@ namespace Test_Inventory.Forms
         {
             popupModal.Visible = false; // Hide the modal
         }
+      
     }
 }

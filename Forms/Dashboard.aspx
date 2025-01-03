@@ -22,6 +22,12 @@
             </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>--%>
+
+    <asp:Label ID="first" runat="server" Text="This is the first control" Visible="false" />
+    <asp:Label ID="second" runat="server" Text="This is the second control" Visible="false" />
+
+
+    </h1>
      <asp:UpdatePanel runat="server">
      <ContentTemplate>
          <div id="popupModal" class="modal" runat="server" visible="false" style="display: block; z-index: 1000; background-color: rgba(0, 0, 0, 0.37); overflow-y: auto;" autopostback="true">

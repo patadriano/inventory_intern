@@ -33,6 +33,24 @@ namespace Test_Inventory.Forms
         protected global::System.Web.UI.WebControls.Button btnpop;
 
         /// <summary>
+        /// first control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label first;
+
+        /// <summary>
+        /// second control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label second;
+
+        /// <summary>
         /// popupModal control.
         /// </summary>
         /// <remarks>

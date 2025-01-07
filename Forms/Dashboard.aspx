@@ -3,7 +3,7 @@
     <asp:Label runat="server" ID="lblusername" Class="dropdown-item" />
     <asp:Button runat="server" ID="btnpop" Text="pop" OnClick="btnpop_Click" />
 
-    <%--<asp:UpdatePanel runat="server">
+    <asp:UpdatePanel runat="server">
         <ContentTemplate>
             <!-- Modal as Panel -->
             <asp:Panel ID="popupModal" runat="server" Visible="false" CssClass="popup-container">
@@ -21,14 +21,13 @@
                 </div>
             </asp:Panel>
         </ContentTemplate>
-    </asp:UpdatePanel>--%>
+    </asp:UpdatePanel>
 
     <asp:Label ID="first" runat="server" Text="This is the first control" Visible="false" />
     <asp:Label ID="second" runat="server" Text="This is the second control" Visible="false" />
 
 
-    </h1>
-     <asp:UpdatePanel runat="server">
+    <%-- <asp:UpdatePanel runat="server">
      <ContentTemplate>
          <div id="popupModal" class="modal" runat="server" visible="false" style="display: block; z-index: 1000; background-color: rgba(0, 0, 0, 0.37); overflow-y: auto;" autopostback="true">
              <div class="modal-dialog modal-lg modal-dialog-top">
@@ -61,7 +60,7 @@
                                              <div class="col px-1">
                                                  <asp:Button runat="server" ID="btnsave" Text="Save" CssClass="btn btn-success" autopostback="true" OnClick="btnsave_Click" />
                                              </div>--%>
-                                         </div>
+                                     <%--    </div>
                                      </div>
                                  </div>
                              </ContentTemplate>
@@ -72,5 +71,44 @@
 
          </div> 
      </ContentTemplate>
- </asp:UpdatePanel>
+ </asp:UpdatePanel>--%>
+    <asp:FileUpload ID="FileUpload1" runat="server" />  
+<asp:Button ID="Button1" runat="server" Text="Upload" onclick="Button1_Click"/>  
+<br />  
+
+    <div>
+            <!-- DropdownList for selecting the image -->
+            <asp:DropDownList 
+                ID="DropDownList1" 
+                runat="server" 
+                AutoPostBack="true" 
+                OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged"
+               >
+            </asp:DropDownList>
+            <br /><br />
+
+            <!-- Image Control for displaying the image -->
+        <asp:UpdatePanel runat="server" ID="Up" UpdateMode="Conditional" ChildrenAsTriggers="true">
+    <ContentTemplate>
+            <asp:Image 
+                ID="Image1" 
+                runat="server" 
+                Width="300px" 
+                Height="300px" 
+                 
+                AlternateText="Selected image will display here." />
+            <br /><br />   
+
+        
+
+    </ContentTemplate>
+</asp:UpdatePanel>
+
+            <!-- Labels for displaying image information -->
+            <asp:Label ID="Label1" runat="server" Text="Image Name: " Font-Bold="true"></asp:Label>
+            <br />
+            <asp:Label ID="Label2" runat="server" Text="Image Type: " Font-Bold="true"></asp:Label>
+            <br />
+            <asp:Label ID="Label3" runat="server" Text="Image Size: " Font-Bold="true"></asp:Label>
+        </div>
 </asp:Content>

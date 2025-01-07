@@ -19,24 +19,11 @@
 <body>
     <div class="container">
         <main>
-            <section class="row" aria-labelledby="aspnetTitle">
-                <h1 id="aspnetTitle">ASP.NET</h1>
-                <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-                <p><a href="http://www.asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-            </section>
-
-            <div class="row">
-                <div class="col-md-6 offset-md-3">
-                    <!-- Login Form -->
-                    <h2>Login</h2>
-                    <asp:TextBox runat="server" ID="txtuser" CssClass="form-control" placeholder="Username/Domain" />
-                    <asp:TextBox runat="server" ID="txtpassword" CssClass="form-control" placeholder="Password" TextMode="Password" />
-                    <br />
-                    <asp:Button runat="server" ID="btnlogin" Text="Login" OnClick="btnlogin_Click" CssClass="btn btn-primary btn-md" />
-                    <br />
-                    <asp:Label ID="lblMessage" runat="server" ForeColor="Red" />
-                </div>
-            </div>
+          <asp:Repeater runat=”server” ID=”repeater1″>
+            <ItemTemplate>
+            <asp:Image ID=”Image1″ ImageUrl=<%# Eval(“Url”) %> runat=”server” Width=”200px” Height=”200px” />
+            </ItemTemplate>
+            </asp:Repeater>
         </main>
     </div>
 

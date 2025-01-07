@@ -11,7 +11,16 @@ namespace Test_Inventory
 {
 
 
-    public partial class _Default
+    public partial class Test_GridStore
     {
+
+        /// <summary>
+        /// rptProducts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptProducts;
     }
 }
